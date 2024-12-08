@@ -39,7 +39,7 @@ typedef ESP8266WebServer WebServer;
 
 class WebSerialStream : public LOGBase {
   public:
-    WebSerialStream(const uint16_t webPort = 80) : _webPort(webPort) {};
+    WebSerialStream(const uint16_t webPort = 80, bool withMDNS = true) : _webPort(webPort), _withMDNS(withMDNS) {};
     ~WebSerialStream();
     virtual size_t write(uint8_t c);
     virtual void begin();
@@ -50,6 +50,7 @@ class WebSerialStream : public LOGBase {
     WebServer * _server = NULL;
     uint8_t _buff[1024];
     unsigned long _at = 0;
+    bool _withMDNS;
   protected:
 };
 #endif

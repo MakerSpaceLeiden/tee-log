@@ -103,7 +103,9 @@ void WebSerialStream::begin() {
   _server->begin();
 
   Log.printf("Opened serial web server on http://%s:%d\n", WiFi.localIP().toString().c_str(), _webPort);
-  MDNS.addService("http", "tcp", _webPort);
+  if (_withMDNS) {
+    MDNS.addService("http", "tcp", _webPort);
+  }
 };
 
 void WebSerialStream::stop() {

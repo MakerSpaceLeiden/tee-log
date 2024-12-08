@@ -29,8 +29,8 @@
 
 class TelnetSerialStream : public LOGBase {
   public:
-    TelnetSerialStream(String hostname, const uint16_t telnetPort = 23, const uint16_t maxClients = MAX_SERIAL_TELNET_CLIENTS) : _hostname(hostname), _telnetPort(telnetPort), _maxClients(maxClients) {};
-    TelnetSerialStream(const uint16_t telnetPort = 23, const uint16_t maxClients = MAX_SERIAL_TELNET_CLIENTS) : _telnetPort(telnetPort), _maxClients(maxClients) {};
+    TelnetSerialStream(String hostname, const uint16_t telnetPort = 23, const uint16_t maxClients = MAX_SERIAL_TELNET_CLIENTS, bool withMDNS = true) : _hostname(hostname), _telnetPort(telnetPort), _maxClients(maxClients), _withMDNS(withMDNS) {};
+    TelnetSerialStream(const uint16_t telnetPort = 23, const uint16_t maxClients = MAX_SERIAL_TELNET_CLIENTS, bool withMDNS = true) : _telnetPort(telnetPort), _maxClients(maxClients), _withMDNS(withMDNS) {};
     ~TelnetSerialStream();
     virtual size_t write(uint8_t c);
     virtual size_t write(uint8_t * buff, size_t len);
@@ -43,6 +43,7 @@ class TelnetSerialStream : public LOGBase {
     uint16_t _telnetPort, _maxClients;
     WiFiServer * _server = NULL;
     WiFiClient ** _serverClients;
+    bool _withMDNS;
   protected:
 };
 #endif
